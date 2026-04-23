@@ -8,28 +8,23 @@
   </head>
   <body>
     <header>
-      <div class="header-inner">
-        <strong>E-Commerce Store</strong>
+      <div class="container">
+        <strong>Simple E-Commerce</strong>
         <nav>
           <a href="/index.html">Products</a>
           <a href="/cart.html">Cart</a>
-          <a href="/orders.html">Orders</a>
           <a href="/auth.html">Login/Register</a>
+          <span id="userLabel" class="muted"></span>
+          <button id="logoutBtn" type="button">Logout</button>
         </nav>
       </div>
     </header>
-
     <main class="container">
-      <h1>Products</h1>
-      <p id="user-info"></p>
+      <div class="title-row">
+        <h1>Product Listings</h1>
+      </div>
       <div id="products" class="grid"></div>
-      <p id="message" class="message"></p>
     </main>
-
-    <script src="/main.js"></script>
-    <script>
-      renderUserInfo();
-      loadProducts();
-    </script>
+    <script src="/script.js"></script>
   </body>
-</html>
+  </html>

@@ -3,11 +3,20 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "echo \"No tests configured\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RahmyMohamed/CodeAlpha_E-Commerce-Store.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RahmyMohamed/CodeAlpha_E-Commerce-Store/issues"
+  },
+  "homepage": "https://github.com/RahmyMohamed/CodeAlpha_E-Commerce-Store#readme",
   "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.3",
