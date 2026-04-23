@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <strong>E-Commerce Store</strong>
+        <nav>
+          <a href="/index.html">Products</a>
+          <a href="/cart.html">Cart</a>
+          <a href="/orders.html">Orders</a>
+          <a href="/auth.html">Login/Register</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <h1>Shopping Cart</h1>
+      <div id="cart-wrap"></div>
+      <button id="checkout-btn">Place Order</button>
+      <p id="message" class="message"></p>
+    </main>
+
+    <script src="/main.js"></script>
+    <script>
+      loadCart();
+      document.getElementById("checkout-btn").addEventListener("click", placeOrder);
+    </script>
+  </body>
+</html>
