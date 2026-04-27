@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/)
 
+Live link : https://rahmymohamed.github.io/CodeAlpha_E-Commerce-Store/
 A full-stack e-commerce application with Express.js backend and vanilla JS frontend.
 
 ## Tech Stack
