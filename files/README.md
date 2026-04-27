@@ -1,5 +1,5 @@
 # NEXUS E-Commerce Store
-
+![preview img](image.png)
 A full-stack e-commerce application with Express.js backend and vanilla JS frontend.
 
 ## Tech Stack
