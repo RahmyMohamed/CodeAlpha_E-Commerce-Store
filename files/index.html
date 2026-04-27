@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS — Premium Tech Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="#" onclick="navigate('home');return false">NEX<span>US</span></a>
+      <div class="nav-links">
+        <a href="#" onclick="navigate('home');return false" class="nav-link">Shop</a>
+        <a href="#" onclick="navigate('orders');return false" class="nav-link" id="ordersNavLink" style="display:none">Orders</a>
+      </div>
+      <div class="nav-actions">
+        <div class="search-wrap">
+          <input type="text" id="globalSearch" placeholder="Search products…" oninput="handleSearch(this.value)" />
+          <span class="search-icon">⌕</span>
+        </div>
+        <button class="cart-btn" onclick="navigate('cart')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="auth-btn" id="authBtn" onclick="toggleAuthModal()">Sign In</button>
+        <div class="user-menu" id="userMenu" style="display:none">
+          <button class="user-avatar" onclick="toggleUserDropdown()" id="userAvatar">J</button>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="dropdown-header" id="dropdownName">John Doe</div>
+            <a href="#" onclick="navigate('orders');toggleUserDropdown();return false">My Orders</a>
+            <a href="#" onclick="handleLogout();return false">Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="app">
+    <div id="page-home" class="page active">
+      <section class="hero">
+        <div class="hero-content">
+          <div class="hero-tag">New Collection 2024</div>
+          <h1>Premium Tech,<br/><em>Elevated</em> Living</h1>
+          <p>Discover curated technology that seamlessly blends performance with design</p>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="scrollToProducts()">Shop Now</button>
+            <button class="btn-ghost" onclick="scrollToProducts()">View All →</button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-circle"></div>
+          <div class="hero-img-wrap">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=90" alt="Featured" class="hero-img" />
+          </div>
+          <div class="floating-badge badge-1">30h<br/><small>Battery</small></div>
+          <div class="floating-badge badge-2">4.9★<br/><small>Rating</small></div>
+        </div>
+      </section>
+      <section class="shop-section" id="shopSection">
+        <div class="filter-bar">
+          <div class="categories" id="categoryTabs">
+            <button class="cat-tab active" onclick="filterCategory('All',this)">All</button>
+            <button class="cat-tab" onclick="filterCategory('Electronics',this)">Electronics</button>
+            <button class="cat-tab" onclick="filterCategory('Accessories',this)">Accessories</button>
+            <button class="cat-tab" onclick="filterCategory('Wearables',this)">Wearables</button>
+            <button class="cat-tab" onclick="filterCategory('Furniture',this)">Furniture</button>
+            <button class="cat-tab" onclick="filterCategory('Photography',this)">Photography</button>
+          </div>
+          <select id="sortSelect" onchange="handleSort(this.value)">
+            <option value="">Sort By</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+        <div class="products-grid" id="productsGrid">
+          <div class="loading-grid">
+            <div class="skeleton-card"></div><div class="skeleton-card"></div>
+            <div class="skeleton-card"></div><div class="skeleton-card"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="page-product" class="page">
+      <div class="product-detail-wrap">
+        <button class="back-btn" onclick="navigate('home')">← Back to Shop</button>
+        <div class="product-detail" id="productDetailContent"></div>
+      </div>
+    </div>
+
+    <div id="page-cart" class="page">
+      <div class="cart-wrap">
+        <h2 class="page-title">Shopping Cart</h2>
+        <div class="cart-layout">
+          <div class="cart-items" id="cartItems"></div>
+          <div class="cart-summary" id="cartSummary"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="page-orders" class="page">
+      <div class="orders-wrap">
+        <h2 class="page-title">My Orders</h2>
+        <div id="ordersList"></div>
+      </div>
+    </div>
+
+    <div id="page-order-detail" class="page">
+      <div class="orders-wrap">
+        <button class="back-btn" onclick="navigate('orders')">← Back to Orders</button>
+        <div id="orderDetailContent"></div>
+      </div>
+    </div>
+
+    <div id="page-checkout" class="page">
+      <div class="checkout-wrap">
+        <h2 class="page-title">Checkout</h2>
+        <div class="checkout-layout">
+          <div class="checkout-form-section">
+            <div class="form-block">
+              <h3>Shipping Address</h3>
+              <div class="form-row">
+                <div class="form-group"><label>First Name</label><input type="text" id="firstName" placeholder="John" /></div>
+                <div class="form-group"><label>Last Name</label><input type="text" id="lastName" placeholder="Doe" /></div>
+              </div>
+              <div class="form-group"><label>Address</label><input type="text" id="address" placeholder="123 Main Street" /></div>
+              <div class="form-row">
+                <div class="form-group"><label>City</label><input type="text" id="city" placeholder="New York" /></div>
+                <div class="form-group"><label>ZIP Code</label><input type="text" id="zip" placeholder="10001" /></div>
+              </div>
+              <div class="form-group"><label>Country</label><input type="text" id="country" placeholder="United States" /></div>
+            </div>
+            <div class="form-block">
+              <h3>Payment</h3>
+              <div class="payment-options">
+                <label class="payment-option selected"><input type="radio" name="payment" value="card" checked /> <span class="pay-icon">💳</span> Credit / Debit Card</label>
+                <label class="payment-option"><input type="radio" name="payment" value="paypal" /> <span class="pay-icon">🅿</span> PayPal</label>
+                <label class="payment-option"><input type="radio" name="payment" value="crypto" /> <span class="pay-icon">₿</span> Crypto</label>
+              </div>
+              <div class="form-group"><label>Card Number</label><input type="text" placeholder="4242 4242 4242 4242" maxlength="19" /></div>
+              <div class="form-row">
+                <div class="form-group"><label>Expiry</label><input type="text" placeholder="MM/YY" maxlength="5" /></div>
+                <div class="form-group"><label>CVV</label><input type="text" placeholder="123" maxlength="3" /></div>
+              </div>
+            </div>
+          </div>
+          <div class="checkout-summary" id="checkoutSummary"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="successModal" style="display:none">
+    <div class="modal success-modal">
+      <div class="success-icon">✓</div>
+      <h2>Order Placed!</h2>
+      <p id="successMsg"></p>
+      <div class="success-track" id="successTrack"></div>
+      <button class="btn-primary" onclick="closeSuccessModal()">Continue Shopping</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="authModal" style="display:none" onclick="closeAuthOnClick(event)">
+    <div class="modal auth-modal">
+      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="loginTab" onclick="switchAuthTab('login')">Sign In</button>
+        <button class="auth-tab" id="registerTab" onclick="switchAuthTab('register')">Register</button>
+      </div>
+      <div id="loginForm">
+        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="you@example.com" /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••" /></div>
+        <div class="auth-error" id="loginError"></div>
+        <button class="btn-primary full" onclick="handleLogin()">Sign In</button>
+      </div>
+      <div id="registerForm" style="display:none">
+        <div class="form-group"><label>Full Name</label><input type="text" id="regName" placeholder="John Doe" /></div>
+        <div class="form-group"><label>Email</label><input type="email" id="regEmail" placeholder="you@example.com" /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="regPassword" placeholder="Min 8 characters" /></div>
+        <div class="auth-error" id="registerError"></div>
+        <button class="btn-primary full" onclick="handleRegister()">Create Account</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
