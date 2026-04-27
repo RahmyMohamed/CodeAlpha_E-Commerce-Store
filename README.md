@@ -1,6 +1,6 @@
 # NEXUS E-Commerce Store
 
-[preview img](image.png)
+![preview img](image.png)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/)
 
